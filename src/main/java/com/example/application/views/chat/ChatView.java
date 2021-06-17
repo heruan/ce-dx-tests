@@ -2,21 +2,26 @@ package com.example.application.views.chat;
 
 import java.util.UUID;
 
+import com.example.application.views.MainLayout;
+
 import com.vaadin.collaborationengine.CollaborationMessageInput;
 import com.vaadin.collaborationengine.CollaborationMessageList;
 import com.vaadin.collaborationengine.UserInfo;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
-import com.example.application.views.MainLayout;
 
 @Route(value = "chat", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
 @PageTitle("Chat")
 public class ChatView extends VerticalLayout {
+
+    private static final String CHANNEL_ATTRIBUTE = "channel";
 
     public ChatView() {
         addClassName("chat-view");
@@ -27,21 +32,34 @@ public class ChatView extends VerticalLayout {
         // identifier, and the user's real name. You can also provide the users
         // avatar by passing an url to the image as a third parameter, or by
         // configuring an `ImageProvider` to `avatarGroup`.
-        UserInfo userInfo = new UserInfo(UUID.randomUUID().toString(), "Steve Lange");
+        UserInfo userInfo = new UserInfo(UUID.randomUUID().toString(),
+                "Steve Lange");
 
         // Tabs allow us to change chat rooms.
-        Tabs tabs = new Tabs(new Tab("#general"), new Tab("#support"), new Tab("#casual"));
+        Span generalTitle = new Span("General");
+        HorizontalLayout generalLayout = new HorizontalLayout(generalTitle);
+        Tab generalTab = new Tab(generalLayout);
+        generalTab.getElement().setAttribute(CHANNEL_ATTRIBUTE, "general");
+
+        Span supportTitle = new Span("Support");
+        HorizontalLayout supportLayout = new HorizontalLayout(supportTitle);
+        Tab supportTab = new Tab(supportLayout);
+        supportTab.getElement().setAttribute(CHANNEL_ATTRIBUTE, "support");
+
+        Span casualTitle = new Span("Casual");
+        HorizontalLayout casualLayout = new HorizontalLayout(casualTitle);
+        Tab casualTab = new Tab(casualLayout);
+        casualTab.getElement().setAttribute(CHANNEL_ATTRIBUTE, "casual");
+
+        Tabs tabs = new Tabs(generalTab, supportTab, casualTab);
         tabs.setWidthFull();
 
         // `CollaborationMessageList` displays messages that are in a
         // Collaboration Engine topic. You should give in the user details of
         // the current user using the component, and a topic Id. Topic id can be
-        // any freeform string. In this template, we have used the format
-        // "chat/#general". Check
-        // https://vaadin.com/docs/latest/ce/collaboration-message-list/#persisting-messages
-        // for information on how to persisting are retrieving messages over
-        // server restarts.
-        CollaborationMessageList list = new CollaborationMessageList(userInfo, "chat/#general");
+        // any freeform string.
+        CollaborationMessageList list = new CollaborationMessageList(userInfo,
+                generalTab.getElement().getAttribute(CHANNEL_ATTRIBUTE));
         list.setWidthFull();
         list.addClassNames("chat-view-message-list");
 
@@ -60,8 +78,9 @@ public class ChatView extends VerticalLayout {
 
         // Change the topic id of the chat when a new tab is selected
         tabs.addSelectedChangeListener(event -> {
-            String channelName = event.getSelectedTab().getLabel();
-            list.setTopic("chat/" + channelName);
+            String channelName = event.getSelectedTab().getElement()
+                    .getAttribute(CHANNEL_ATTRIBUTE);
+            list.setTopic(channelName);
         });
     }
 
