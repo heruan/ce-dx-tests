@@ -1,6 +1,4 @@
 {
-  "name": "no-name",
-  "license": "UNLICENSED",
   "dependencies": {
     "@polymer/iron-icon": "3.0.1",
     "@polymer/iron-list": "3.1.0",
@@ -19,7 +17,7 @@
     "@vaadin/vaadin-confirm-dialog": "21.0.0-alpha6",
     "@vaadin/vaadin-context-menu": "21.0.0-alpha6",
     "@vaadin/vaadin-cookie-consent": "21.0.0-alpha6",
-    "@vaadin/vaadin-core-shrinkwrap": "21.0.0-alpha5",
+    "@vaadin/vaadin-core-shrinkwrap": "21.0.0-alpha6",
     "@vaadin/vaadin-crud": "21.0.0-alpha6",
     "@vaadin/vaadin-custom-field": "21.0.0-alpha6",
     "@vaadin/vaadin-date-picker": "21.0.0-alpha6",
@@ -44,7 +42,7 @@
     "@vaadin/vaadin-radio-button": "21.0.0-alpha6",
     "@vaadin/vaadin-rich-text-editor": "21.0.0-alpha6",
     "@vaadin/vaadin-select": "21.0.0-alpha6",
-    "@vaadin/vaadin-shrinkwrap": "21.0.0-alpha5",
+    "@vaadin/vaadin-shrinkwrap": "21.0.0-alpha6",
     "@vaadin/vaadin-split-layout": "21.0.0-alpha6",
     "@vaadin/vaadin-tabs": "21.0.0-alpha6",
     "@vaadin/vaadin-template-renderer": "21.0.0-alpha6",
@@ -85,6 +83,8 @@
     "workbox-precaching": "6.1.0",
     "workbox-webpack-plugin": "6.1.0"
   },
+  "license": "UNLICENSED",
+  "name": "no-name",
   "vaadin": {
     "dependencies": {
       "@polymer/iron-icon": "3.0.1",
@@ -102,7 +102,7 @@
       "@vaadin/vaadin-confirm-dialog": "21.0.0-alpha6",
       "@vaadin/vaadin-context-menu": "21.0.0-alpha6",
       "@vaadin/vaadin-cookie-consent": "21.0.0-alpha6",
-      "@vaadin/vaadin-core-shrinkwrap": "21.0.0-alpha5",
+      "@vaadin/vaadin-core-shrinkwrap": "21.0.0-alpha6",
       "@vaadin/vaadin-crud": "21.0.0-alpha6",
       "@vaadin/vaadin-custom-field": "21.0.0-alpha6",
       "@vaadin/vaadin-date-picker": "21.0.0-alpha6",
@@ -127,7 +127,7 @@
       "@vaadin/vaadin-radio-button": "21.0.0-alpha6",
       "@vaadin/vaadin-rich-text-editor": "21.0.0-alpha6",
       "@vaadin/vaadin-select": "21.0.0-alpha6",
-      "@vaadin/vaadin-shrinkwrap": "21.0.0-alpha5",
+      "@vaadin/vaadin-shrinkwrap": "21.0.0-alpha6",
       "@vaadin/vaadin-split-layout": "21.0.0-alpha6",
       "@vaadin/vaadin-tabs": "21.0.0-alpha6",
       "@vaadin/vaadin-template-renderer": "21.0.0-alpha6",
@@ -163,6 +163,6 @@
       "workbox-precaching": "6.1.0",
       "workbox-webpack-plugin": "6.1.0"
     },
-    "hash": "dd04bd99444682ec49e58192e3c85e826eea6b97f43040cbdaa95c72b148a737"
+    "hash": "f48da19b85d5ddfccbfa75b24e018c0b0923c7b08f1aad1a5024698285c3c9a5"
   }
 }
