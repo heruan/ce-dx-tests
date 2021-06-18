@@ -21,7 +21,25 @@ import com.vaadin.flow.router.RouteAlias;
 @PageTitle("Chat")
 public class ChatView extends VerticalLayout {
 
-    private static final String CHANNEL_ATTRIBUTE = "channel";
+    static class ChatTab extends Tab {
+
+        final Span count = new Span("0");
+
+        final String channel;
+
+        public ChatTab(String title, String channel) {
+            add(new HorizontalLayout(new Span(title), count));
+            this.channel = channel;
+        }
+
+        void setCount(int count) {
+            this.count.setText("" + count);
+        }
+
+        public String getChannel() {
+            return channel;
+        }
+    }
 
     public ChatView() {
         addClassName("chat-view");
@@ -36,20 +54,9 @@ public class ChatView extends VerticalLayout {
                 "Steve Lange");
 
         // Tabs allow us to change chat rooms.
-        Span generalTitle = new Span("General");
-        HorizontalLayout generalLayout = new HorizontalLayout(generalTitle);
-        Tab generalTab = new Tab(generalLayout);
-        generalTab.getElement().setAttribute(CHANNEL_ATTRIBUTE, "general");
-
-        Span supportTitle = new Span("Support");
-        HorizontalLayout supportLayout = new HorizontalLayout(supportTitle);
-        Tab supportTab = new Tab(supportLayout);
-        supportTab.getElement().setAttribute(CHANNEL_ATTRIBUTE, "support");
-
-        Span casualTitle = new Span("Casual");
-        HorizontalLayout casualLayout = new HorizontalLayout(casualTitle);
-        Tab casualTab = new Tab(casualLayout);
-        casualTab.getElement().setAttribute(CHANNEL_ATTRIBUTE, "casual");
+        ChatTab generalTab = new ChatTab("General", "#general");
+        ChatTab supportTab = new ChatTab("Support", "#support");
+        ChatTab casualTab = new ChatTab("Casual", "#casual");
 
         Tabs tabs = new Tabs(generalTab, supportTab, casualTab);
         tabs.setWidthFull();
@@ -59,7 +66,7 @@ public class ChatView extends VerticalLayout {
         // the current user using the component, and a topic Id. Topic id can be
         // any freeform string.
         CollaborationMessageList list = new CollaborationMessageList(userInfo,
-                generalTab.getElement().getAttribute(CHANNEL_ATTRIBUTE));
+                generalTab.getChannel());
         list.setWidthFull();
         list.addClassNames("chat-view-message-list");
 
@@ -78,9 +85,9 @@ public class ChatView extends VerticalLayout {
 
         // Change the topic id of the chat when a new tab is selected
         tabs.addSelectedChangeListener(event -> {
-            String channelName = event.getSelectedTab().getElement()
-                    .getAttribute(CHANNEL_ATTRIBUTE);
-            list.setTopic(channelName);
+            ChatTab selectedTab = (ChatTab) event.getSelectedTab();
+            String channel = selectedTab.getChannel();
+            list.setTopic(channel);
         });
     }
 
