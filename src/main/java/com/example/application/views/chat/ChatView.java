@@ -21,7 +21,16 @@ import com.vaadin.flow.router.RouteAlias;
 @PageTitle("Chat")
 public class ChatView extends VerticalLayout {
 
-    static class ChatTab extends Tab {
+    // UserInfo is used by Collaboration Engine and is used to share details
+    // of users to each other to able collaboration. Replace this with
+    // information about the actual user that is logged, providing a user
+    // identifier, and the user's real name. You can also provide the users
+    // avatar by passing an url to the image as a third parameter, or by
+    // configuring an `ImageProvider` to `avatarGroup`.
+    private UserInfo userInfo = new UserInfo(UUID.randomUUID().toString(),
+        "Steve Lange");
+
+    class ChatTab extends Tab {
 
         final Span count = new Span("0");
 
@@ -44,15 +53,6 @@ public class ChatView extends VerticalLayout {
     public ChatView() {
         addClassName("chat-view");
         setSpacing(false);
-        // UserInfo is used by Collaboration Engine and is used to share details
-        // of users to each other to able collaboration. Replace this with
-        // information about the actual user that is logged, providing a user
-        // identifier, and the user's real name. You can also provide the users
-        // avatar by passing an url to the image as a third parameter, or by
-        // configuring an `ImageProvider` to `avatarGroup`.
-        UserInfo userInfo = new UserInfo(UUID.randomUUID().toString(),
-                "Steve Lange");
-
         // Tabs allow us to change chat rooms.
         ChatTab generalTab = new ChatTab("General", "#general");
         ChatTab supportTab = new ChatTab("Support", "#support");
