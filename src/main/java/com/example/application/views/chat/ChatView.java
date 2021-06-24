@@ -28,17 +28,18 @@ public class ChatView extends VerticalLayout {
 
     class ChatTab extends Tab {
 
-        final Span count = new Span("0");
+        // Shows the number of active users in the ChatTab
+        final Span userCount = new Span("0");
 
         final String channel;
 
         public ChatTab(String title, String channel) {
-            add(new HorizontalLayout(new Span(title), count));
+            add(new HorizontalLayout(new Span(title), userCount));
             this.channel = channel;
         }
 
-        void setCount(long count) {
-            this.count.setText("" + count);
+        void setUserCount(long userCount) {
+            this.userCount.setText("" + userCount);
         }
 
         public String getChannel() {
