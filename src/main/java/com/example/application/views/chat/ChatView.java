@@ -41,7 +41,7 @@ public class ChatView extends VerticalLayout {
             this.channel = channel;
         }
 
-        void setCount(int count) {
+        void setCount(long count) {
             this.count.setText("" + count);
         }
 
