@@ -21,19 +21,25 @@ import com.vaadin.flow.router.RouteAlias;
 @PageTitle("Chat")
 public class ChatView extends VerticalLayout {
 
-    static class ChatTab extends Tab {
+    // UserInfo is used by Collaboration Engine and to share details
+    // of users to each other to enable collaboration.
+    private UserInfo userInfo = new UserInfo(UUID.randomUUID().toString(),
+        "Steve Lange");
 
-        final Span count = new Span("0");
+    class ChatTab extends Tab {
+
+        // Shows the number of active users in the ChatTab
+        final Span userCount = new Span("0");
 
         final String channel;
 
         public ChatTab(String title, String channel) {
-            add(new HorizontalLayout(new Span(title), count));
+            add(new HorizontalLayout(new Span(title), userCount));
             this.channel = channel;
         }
 
-        void setCount(int count) {
-            this.count.setText("" + count);
+        void setUserCount(long userCount) {
+            this.userCount.setText("" + userCount);
         }
 
         public String getChannel() {
@@ -42,17 +48,7 @@ public class ChatView extends VerticalLayout {
     }
 
     public ChatView() {
-        addClassName("chat-view");
         setSpacing(false);
-        // UserInfo is used by Collaboration Engine and is used to share details
-        // of users to each other to able collaboration. Replace this with
-        // information about the actual user that is logged, providing a user
-        // identifier, and the user's real name. You can also provide the users
-        // avatar by passing an url to the image as a third parameter, or by
-        // configuring an `ImageProvider` to `avatarGroup`.
-        UserInfo userInfo = new UserInfo(UUID.randomUUID().toString(),
-                "Steve Lange");
-
         // Tabs allow us to change chat rooms.
         ChatTab generalTab = new ChatTab("General", "#general");
         ChatTab supportTab = new ChatTab("Support", "#support");
@@ -68,14 +64,12 @@ public class ChatView extends VerticalLayout {
         CollaborationMessageList list = new CollaborationMessageList(userInfo,
                 generalTab.getChannel());
         list.setWidthFull();
-        list.addClassNames("chat-view-message-list");
 
         // `CollaborationMessageInput is a textfield and button, to be able to
         // submit new messages. To avoid having to set the same info into both
         // the message list and message input, the input takes in the list as an
         // constructor argument to get the information from there.
         CollaborationMessageInput input = new CollaborationMessageInput(list);
-        input.addClassNames("chat-view-message-input");
         input.setWidthFull();
 
         // Layouting
