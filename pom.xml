@@ -10,7 +10,7 @@
 
     <properties>
         <java.version>8</java.version>
-        <vaadin.version>21.0.0.alpha8</vaadin.version>
+        <vaadin.version>21.0.2</vaadin.version>
     </properties>
 
     <parent>
@@ -127,6 +127,11 @@
             <artifactId>webdrivermanager</artifactId>
             <version>4.4.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>collaboration-engine</artifactId>
+            <version>4.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
