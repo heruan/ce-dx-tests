@@ -1,7 +1,6 @@
 package com.collaborationengine.dx.views;
 
 import com.vaadin.collaborationengine.CollaborationEngine;
-import com.vaadin.collaborationengine.CollaborationList;
 import com.vaadin.collaborationengine.TopicConnection;
 import com.vaadin.collaborationengine.UserInfo;
 import com.vaadin.flow.component.button.Button;
@@ -31,19 +30,6 @@ public class TestView extends VerticalLayout {
     }
 
     Registration onConnectionActivate(TopicConnection connection) {
-        CollaborationList values = connection.getNamedList("values");
-        Registration r1 = addButton.addClickListener(event -> {
-            // Insert an item with the value "foo" in the list
-        });
-        Registration r2 = showButton.addClickListener(event -> {
-            // Show a notification with the current item value
-        });
-        Registration r3 = replaceButton.addClickListener(event -> {
-            // Replace the item value with "bar"
-        });
-        Registration r4 = removeButton.addClickListener(event -> {
-            // Remove the item from the list
-        });
-        return Registration.combine(r1, r2, r3, r4);
+        return null;
     }
 }
